@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let expense of expenses; let i = index">
+    {{ expense.category }}: {{ expense.amount | currency }}
+    <button (click)="deleteExpense(i)">Delete</button>
+  </li>
+</ul>

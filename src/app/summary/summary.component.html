@@ -1,0 +1,8 @@
+<div>
+  <h2>Weekly Summary</h2>
+  <ul>
+    <li *ngFor="let day of getSummaryKeys()">
+      {{ day }}: {{ summary[day] | currency }}
+    </li>
+  </ul>
+</div>
