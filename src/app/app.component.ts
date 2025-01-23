@@ -12,6 +12,7 @@ import { SummaryComponent } from './summary/summary.component';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  title = 'expense-tracker';
   days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   currentDay: string = this.days[0];
   expenses: { [day: string]: { category: string; amount: number }[] } = {};
