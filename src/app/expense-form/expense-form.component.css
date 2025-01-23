@@ -11,6 +11,28 @@ input {
   border-radius: 5px;
 }
 
+
 button {
   margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
+
+button:hover {
+  background: linear-gradient(90deg, #0056b3, #003d80);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.01);
+}
+
+button:active {
+  transform: scale(1);
+  box-shadow: none;
+}
+

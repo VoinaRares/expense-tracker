@@ -18,3 +18,26 @@ li {
 li:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #c0392b, #962d22);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.01);
+}
+
+button:active {
+  transform: scale(1);
+  box-shadow: none;
+}
