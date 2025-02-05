@@ -7,13 +7,26 @@ import { SummaryComponent } from './summary/summary.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [DaySelectorComponent, ExpenseFormComponent, ExpenseListComponent, SummaryComponent],
+  imports: [
+    DaySelectorComponent,
+    ExpenseFormComponent,
+    ExpenseListComponent,
+    SummaryComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'expense-tracker';
-  days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  days: string[] = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
   currentDay: string = this.days[0];
   expenses: { [day: string]: { category: string; amount: number }[] } = {};
 
@@ -33,7 +46,12 @@ export class AppComponent {
   }
 
   getDailyTotal(day: string) {
-    return this.expenses[day]?.reduce((total, expense) => total + expense.amount, 0) || 0;
+    return (
+      this.expenses[day]?.reduce(
+        (total, expense) => total + expense.amount,
+        0
+      ) || 0
+    );
   }
 
   getWeeklySummary() {

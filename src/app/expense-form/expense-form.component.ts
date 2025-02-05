@@ -9,7 +9,10 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./expense-form.component.css'],
 })
 export class ExpenseFormComponent {
-  @Output() expenseAdded = new EventEmitter<{ category: string; amount: number }>();
+  @Output() expenseAdded = new EventEmitter<{
+    category: string;
+    amount: number;
+  }>();
 
   category: string = '';
   amount: number = 0;

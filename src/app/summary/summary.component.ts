@@ -12,8 +12,6 @@ export class SummaryComponent {
   @Input() summary!: { [day: string]: number };
 
   getSummaryKeys(): string[] {
-
     return Object.keys(this.summary);
-
   }
 }

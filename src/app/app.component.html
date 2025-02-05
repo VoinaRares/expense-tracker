@@ -1,7 +1,14 @@
 <div>
   <h1>Expense Tracker</h1>
-  <app-day-selector [days]="days" [currentDay]="currentDay" (daySelected)="selectDay($event)"></app-day-selector>
+  <app-day-selector
+    [days]="days"
+    [currentDay]="currentDay"
+    (daySelected)="selectDay($event)"
+  ></app-day-selector>
   <app-expense-form (expenseAdded)="addExpense($event)"></app-expense-form>
-  <app-expense-list [expenses]="expenses[currentDay]" (expenseDeleted)="deleteExpense(currentDay, $event)"></app-expense-list>
+  <app-expense-list
+    [expenses]="expenses[currentDay]"
+    (expenseDeleted)="deleteExpense(currentDay, $event)"
+  ></app-expense-list>
   <app-summary [summary]="getWeeklySummary()"></app-summary>
 </div>
