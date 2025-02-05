@@ -5,6 +5,7 @@ import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { SummaryComponent } from './summary/summary.component';
 import { Days } from './shared/days.enum';
 import { Expense } from './shared/expense.interface';
+import { ExpensesByDay } from './shared/expenses-by-day.interface';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,6 @@ export class AppComponent {
     return this.days.reduce((summary, day) => {
       summary[day] = this.getDailyTotal(day);
       return summary;
-    }, {} as { [day: string]: number });
+    }, {} as  ExpensesByDay);
   }
 }
