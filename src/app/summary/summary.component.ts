@@ -15,4 +15,8 @@ export class SummaryComponent {
   getSummaryKeys(): string[] {
     return Object.keys(this.summary);
   }
+
+  calculateTotal(): number {
+    return this.getSummaryKeys().reduce((total, day) => total + this.summary[day], 0);
+  }
 }
