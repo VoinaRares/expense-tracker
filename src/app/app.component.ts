@@ -3,6 +3,7 @@ import { DaySelectorComponent } from './day-selector/day-selector.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { SummaryComponent } from './summary/summary.component';
+import { Days } from './shared/days.enum';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +19,7 @@ import { SummaryComponent } from './summary/summary.component';
 })
 export class AppComponent {
   title = 'expense-tracker';
-  days: string[] = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
+  days: string[] =Object.values(Days);
   currentDay: string = this.days[0];
   expenses: { [day: string]: { category: string; amount: number }[] } = {};
 

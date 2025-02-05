@@ -1,7 +1,6 @@
 <div>
   <h1>Expense Tracker</h1>
   <app-day-selector
-    [days]="days"
     [currentDay]="currentDay"
     (daySelected)="selectDay($event)"
   ></app-day-selector>
@@ -10,5 +9,7 @@
     [expenses]="expenses[currentDay]"
     (expenseDeleted)="deleteExpense(currentDay, $event)"
   ></app-expense-list>
+  @if(currentDay === 'Total'){
   <app-summary [summary]="getWeeklySummary()"></app-summary>
+  }
 </div>
