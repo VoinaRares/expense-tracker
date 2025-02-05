@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.css'],
+  styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
   @Input() summary!: { [day: string]: number };

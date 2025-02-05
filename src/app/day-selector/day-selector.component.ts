@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './day-selector.component.html',
-  styleUrls: ['./day-selector.component.css'],
+  styleUrls: ['./day-selector.component.scss'],
 })
 export class DaySelectorComponent {
   @Input() days!: string[];

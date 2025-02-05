@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './expense-list.component.html',
-  styleUrls: ['./expense-list.component.css'],
+  styleUrls: ['./expense-list.component.scss'],
 })
 export class ExpenseListComponent {
   @Input() expenses!: { category: string; amount: number }[];

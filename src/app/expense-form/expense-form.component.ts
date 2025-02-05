@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './expense-form.component.html',
-  styleUrls: ['./expense-form.component.css'],
+  styleUrls: ['./expense-form.component.scss'],
 })
 export class ExpenseFormComponent {
   @Output() expenseAdded = new EventEmitter<{

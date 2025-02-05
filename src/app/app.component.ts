@@ -14,7 +14,7 @@ import { SummaryComponent } from './summary/summary.component';
     SummaryComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'expense-tracker';
