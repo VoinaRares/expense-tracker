@@ -1,20 +1,21 @@
+$background-color: #007bff;
+
 button {
   margin: 5px;
   padding: 8px 12px;
   font-size: 14px;
-  background-color: #007bff;
+  background-color: $background-color;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-}
 
-button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-
-button.active {
-  background-color: #010736;
+  &:hover {
+    background-color: $background-color;
+    transform: scale(1.05);
+  }
+  &.active {
+    background-color: #010736;
+  }
 }

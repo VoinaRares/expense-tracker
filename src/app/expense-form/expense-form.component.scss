@@ -1,3 +1,6 @@
+$primary-color: #007bff;
+$primary-color-dark: #0056b3;
+
 form {
   display: flex;
   flex-direction: column;
@@ -17,20 +20,24 @@ button {
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background: linear-gradient(90deg, #007bff, #0056b3);
+  background: linear-gradient(90deg, $primary-color, $primary-color);
   border: none;
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
 
-button:hover {
-  background: linear-gradient(90deg, #0056b3, #003d80);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transform: scale(1.01);
-}
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      $primary-color-dark,
+      $primary-color-dark
+    );
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.01);
+  }
 
-button:active {
-  transform: scale(1);
-  box-shadow: none;
+  &:active {
+    transform: scale(1);
+    box-shadow: none;
+  }
 }
