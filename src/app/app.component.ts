@@ -4,6 +4,7 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { SummaryComponent } from './summary/summary.component';
 import { Days } from './shared/days.enum';
+import { Expense } from './shared/expense.interface';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +22,13 @@ export class AppComponent {
   title = 'expense-tracker';
   days: string[] =Object.values(Days);
   currentDay: string = this.days[0];
-  expenses: { [day: string]: { category: string; amount: number }[] } = {};
+  expenses: { [day: string]: Expense[] } = {};
 
   selectDay(day: string) {
     this.currentDay = day;
   }
 
-  addExpense(expense: { category: string; amount: number }) {
+  addExpense(expense: Expense) {
     if (!this.expenses[this.currentDay]) {
       this.expenses[this.currentDay] = [];
     }

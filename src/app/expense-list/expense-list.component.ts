@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Expense } from '../shared/expense.interface';
 
 @Component({
   selector: 'app-expense-list',
@@ -9,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./expense-list.component.scss'],
 })
 export class ExpenseListComponent {
-  @Input() expenses!: { category: string; amount: number }[];
+  @Input() expenses!: Expense[];
   @Output() expenseDeleted = new EventEmitter<number>();
 
   deleteExpense(index: number) {

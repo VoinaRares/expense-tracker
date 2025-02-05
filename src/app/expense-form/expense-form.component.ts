@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Expense } from '../shared/expense.interface';
 
 @Component({
   selector: 'app-expense-form',
@@ -9,10 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./expense-form.component.scss'],
 })
 export class ExpenseFormComponent {
-  @Output() expenseAdded = new EventEmitter<{
-    category: string;
-    amount: number;
-  }>();
+  @Output() expenseAdded = new EventEmitter<Expense>();
 
   category: string = '';
   amount: number = 0;
