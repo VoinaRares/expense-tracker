@@ -17,6 +17,9 @@ export class SummaryComponent {
   }
 
   calculateTotal(): number {
-    return this.getSummaryKeys().reduce((total, day) => total + this.summary[day], 0);
+    return this.getSummaryKeys().reduce(
+      (total, day) => total + this.summary[day],
+      0
+    );
   }
 }

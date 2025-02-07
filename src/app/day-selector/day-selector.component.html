@@ -1,9 +1,10 @@
-<div>
-  <button
-    *ngFor="let day of days"
-    [class.active]="day === currentDay"
-    (click)="selectDay(day)"
-  >
+<div class="day-selector">
+  <button (click)="goToPrevious()">Previous</button>
+
+  @for (day of days; track day) {
+  <button [class.active]="day === currentDay" (click)="selectDay(day)">
     {{ day }}
   </button>
+  }
+  <button (click)="goToNext()">Next</button>
 </div>

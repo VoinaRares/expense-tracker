@@ -14,7 +14,7 @@
   ></app-expense-form>
 
   <app-expense-list
-    [expenses]="expenseService.expenses[expenseService.currentDay]"
+    [expenses]="expenseService.expenses[expenseService.currentDay] || []"
     (expenseDeleted)="
       expenseService.deleteExpense(expenseService.currentDay, $event)
     "

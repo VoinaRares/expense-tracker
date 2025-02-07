@@ -21,24 +21,4 @@ import { ExpenseService } from './shared/expense.service';
 export class AppComponent {
   title = 'expense-tracker';
   constructor(public expenseService: ExpenseService) {}
-
-  selectDay(day: string) {
-    this.expenseService.selectDay(day);
-  }
-
-  addExpense(expense: Expense) {
-    this.expenseService.addExpense(expense);
-  }
-
-  deleteExpense(day: string, index: number) {
-    this.expenseService.deleteExpense(day, index);
-  }
-
-  getDailyTotal(day: string) {
-    return this.expenseService.getDailyTotal(day);
-  }
-
-  getWeeklySummary() {
-    return this.expenseService.getWeeklySummary();
-  }
 }

@@ -5,7 +5,7 @@
       @if(day !== 'Total'){
       {{ day }}: {{ summary[day] | currency }}
       }@else {
-        {{ day }}: {{ calculateTotal() | currency }}
+      {{ day }}: {{ calculateTotal() | currency }}
       }
     </li>
   </ul>
