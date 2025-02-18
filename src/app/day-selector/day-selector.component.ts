@@ -1,16 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Days } from '../shared/days.enum';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-day-selector',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './day-selector.component.html',
   styleUrls: ['./day-selector.component.scss'],
 })
 export class DaySelectorComponent {
   days = Object.values(Days);
+
+  constructor(private router: Router) {}
 
   private navigableDays = Object.values(Days).filter(
     (day) => day !== Days.Total
@@ -31,6 +34,8 @@ export class DaySelectorComponent {
       (currentIndex - 1 + this.navigableDays.length) %
       this.navigableDays.length;
     this.selectDay(this.navigableDays[newIndex]);
+
+    this.router.navigate([this.navigableDays[newIndex]]);
   }
 
   goToNext() {
@@ -39,5 +44,9 @@ export class DaySelectorComponent {
     );
     const newIndex = (currentIndex + 1) % this.navigableDays.length;
     this.selectDay(this.navigableDays[newIndex]);
+
+    this.router.navigate([this.navigableDays[newIndex]]);
   }
+
+
 }

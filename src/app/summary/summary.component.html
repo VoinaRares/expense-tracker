@@ -1,5 +1,9 @@
 <div>
   <h2>Weekly Summary</h2>
+  <app-day-selector
+  [currentDay]="expenseService.currentDay"
+  (daySelected)="expenseService.selectDay($event)"
+></app-day-selector>
   <ul>
     <li *ngFor="let day of getSummaryKeys()">
       @if(day !== 'Total'){

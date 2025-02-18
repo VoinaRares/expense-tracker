@@ -1,10 +1,14 @@
 <div class="day-selector">
   <button (click)="goToPrevious()">Previous</button>
 
-  @for (day of days; track day) {
-  <button [class.active]="day === currentDay" (click)="selectDay(day)">
-    {{ day }}
-  </button>
-  }
+  <button [class.active]=" 'Monday' === currentDay" routerLink="/Monday"> Monday</button>
+  <button [class.active]=" 'Tuesday' === currentDay" routerLink="/Tuesday"> Tuesday</button>
+  <button [class.active]=" 'Wednesday' === currentDay" routerLink="/Wednesday"> Wednesday</button>
+  <button [class.active]=" 'Thursday' === currentDay" routerLink="/Thursday"> Thursday</button>
+  <button [class.active]=" 'Friday' === currentDay" routerLink="/Friday"> Friday</button>
+  <button [class.active]=" 'Saturday' === currentDay" routerLink="/Saturday"> Saturday</button>
+  <button [class.active]=" 'Sunday' === currentDay" routerLink="/Sunday"> Sunday</button>
+  <button [class.active]=" 'Total' === currentDay" routerLink="/Total"> Total </button>
+
   <button (click)="goToNext()">Next</button>
 </div>

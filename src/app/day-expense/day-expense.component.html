@@ -1,0 +1,14 @@
+<h1> Expense Tracker</h1>
+<app-day-selector
+  [currentDay]="expenseService.currentDay"
+  (daySelected)="expenseService.selectDay($event)"
+></app-day-selector>
+<app-expense-form
+  (expenseAdded)="expenseService.addExpense($event)"
+></app-expense-form>
+<app-expense-list
+  [expenses]="expenseService.expenses[expenseService.currentDay] || []"
+  (expenseDeleted)="
+    expenseService.deleteExpense(expenseService.currentDay, $event)
+  "
+></app-expense-list>

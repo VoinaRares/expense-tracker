@@ -1,16 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DaySelectorComponent } from '../day-selector/day-selector.component';
+import { ExpenseService } from '../shared/expense.service';
 import { ExpensesByDay } from '../shared/expenses-by-day.interface';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DaySelectorComponent],
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
-  @Input() summary!: ExpensesByDay;
+  constructor(public expenseService: ExpenseService) {}
+
+  get summary(): ExpensesByDay {
+    return this.expenseService.getWeeklySummary();
+  }
 
   getSummaryKeys(): string[] {
     return Object.keys(this.summary);
