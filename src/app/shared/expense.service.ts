@@ -4,14 +4,17 @@ import { filter } from 'rxjs/operators';
 import { Expense } from './expense.interface';
 import { Days } from './days.enum';
 import { ExpensesByDay } from './expenses-by-day.interface';
+import { of, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExpenseService {
   days: string[] = Object.values(Days);
-  currentDay: string = this.days[0];
-  expenses: { [day: string]: Expense[] } = {};
+  private currentDaySubject = new BehaviorSubject<string>('Monday');
+  currentDay$ = this.currentDaySubject.asObservable();
+  private expensesSubject = new BehaviorSubject<{ [day: string]: Expense[] }>({});
+  expenses$ = this.expensesSubject.asObservable();
   private storageKey = 'expenses';
 
   constructor(private router: Router) {
@@ -19,7 +22,7 @@ export class ExpenseService {
       this.loadExpensesFromLocalStorage();
     } catch (error) {
       console.error('Failed to initialize expenses:', error);
-      this.expenses = {};
+      this.expensesSubject.next({});
     }
 
     this.router.events
@@ -29,13 +32,21 @@ export class ExpenseService {
           const urlSegments = event.urlAfterRedirects.split('/');
           const dayFromUrl = urlSegments[1];
           if (this.days.includes(dayFromUrl)) {
-            this.currentDay = dayFromUrl;
+            this.currentDaySubject.next(dayFromUrl);
           } else {
-            console.warn(`Invalid day from URL: ${dayFromUrl}. Using current day: ${this.currentDay}`);
+            console.warn(`Invalid day from URL: ${dayFromUrl}. Using current day: ${this.currentDaySubject.value}`);
           }
         },
         error: (err) => console.error('Router event error:', err)
       });
+  }
+
+  getExpensesForDay(day: string): Expense[] {
+    return this.expensesSubject.value[day] || [];
+  }
+
+  getCurrentDaySubject(): string {
+    return this.currentDaySubject.value;
   }
 
   private loadExpensesFromLocalStorage(): void {
@@ -43,13 +54,14 @@ export class ExpenseService {
       const storedExpenses = localStorage.getItem(this.storageKey);
       if (storedExpenses) {
         const parsed = JSON.parse(storedExpenses);
-
         if (this.isValidExpensesStructure(parsed)) {
-          this.expenses = parsed;
+          console.log('Loaded expenses from localStorage:', parsed);
+          this.expensesSubject.next(parsed);
+          console.log('Current expenses:', this.expensesSubject.value);
         } else {
           console.error('Invalid expenses structure in localStorage. Resetting expenses.');
           localStorage.setItem(this.storageKey, "{}");
-          this.expenses = {};
+          this.expensesSubject.next({});
         }
       }
     } catch (error) {
@@ -59,18 +71,17 @@ export class ExpenseService {
   }
 
   private isValidExpensesStructure(data: Expense[]): boolean {
-  return typeof data === 'object' && Object.keys(data).every((key) => {
-    if (!this.days.includes(key)) {
-      return false;
-    }
-    return true;
-  });
+    return typeof data === 'object' && Object.keys(data).every((key) => {
+      if (!this.days.includes(key)) {
+        return false;
+      }
+      return true;
+    });
   }
-
 
   private saveExpensesToLocalStorage(): void {
     try {
-      localStorage.setItem(this.storageKey, JSON.stringify(this.expenses));
+      localStorage.setItem(this.storageKey, JSON.stringify(this.expensesSubject.value));
     } catch (error) {
       console.error('Error saving expenses to localStorage:', error);
       throw new Error('Failed to persist expenses to storage');
@@ -81,19 +92,21 @@ export class ExpenseService {
     if (!this.days.includes(day)) {
       throw new Error(`Invalid day selected: ${day}`);
     }
-    this.currentDay = day;
+    this.currentDaySubject.next(day);
   }
 
   addExpense(expense: Expense) {
-    if (!this.days.includes(this.currentDay)) {
-      throw new Error(`Cannot add expense to invalid day: ${this.currentDay}`);
+    if (!this.days.includes(this.currentDaySubject.value)) {
+      throw new Error(`Cannot add expense to invalid day: ${this.currentDaySubject.value}`);
     }
 
     try {
-      if (!this.expenses[this.currentDay]) {
-        this.expenses[this.currentDay] = [];
+      const currentExpenses = this.expensesSubject.value;
+      if (!currentExpenses[this.currentDaySubject.value]) {
+        currentExpenses[this.currentDaySubject.value] = [];
       }
-      this.expenses[this.currentDay].push(expense);
+      currentExpenses[this.currentDaySubject.value].push(expense);
+      this.expensesSubject.next(currentExpenses);
       this.saveExpensesToLocalStorage();
     } catch (error) {
       console.error('Error adding expense:', error);
@@ -106,12 +119,14 @@ export class ExpenseService {
       throw new Error(`Invalid day: ${day}`);
     }
 
-    if (!this.expenses[day] || index < 0 || index >= this.expenses[day].length) {
+    const currentExpenses = this.expensesSubject.value;
+    if (!currentExpenses[day] || index < 0 || index >= currentExpenses[day].length) {
       throw new Error(`Invalid expense index: ${index} for day ${day}`);
     }
 
     try {
-      this.expenses[day].splice(index, 1);
+      currentExpenses[day].splice(index, 1);
+      this.expensesSubject.next(currentExpenses);
       this.saveExpensesToLocalStorage();
     } catch (error) {
       console.error('Error deleting expense:', error);
@@ -126,7 +141,7 @@ export class ExpenseService {
     }
 
     return (
-      this.expenses[day]?.reduce(
+      this.expensesSubject.value[day]?.reduce(
         (total, expense) => total + expense.amount,
         0
       ) || 0

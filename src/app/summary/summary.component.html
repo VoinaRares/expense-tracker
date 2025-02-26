@@ -1,16 +1,10 @@
 <div>
   <h1>Weekly Summary</h1>
   <app-day-selector
-  [currentDay]="expenseService.currentDay"
-  (daySelected)="expenseService.selectDay($event)"
 ></app-day-selector>
   <ul>
-    <li *ngFor="let day of getSummaryKeys()">
-      @if(day !== 'Total'){
-      {{ day }}: {{ summary[day] | currency }}
-      }@else {
-      {{ day }}: {{ calculateTotal() | currency }}
-      }
-    </li>
+    @for(day of getSummaryKeys(); track day){
+      <app-day-summary [day]="day"></app-day-summary>
+    }
   </ul>
 </div>

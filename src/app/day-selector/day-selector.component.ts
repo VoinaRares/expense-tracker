@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Days } from '../shared/days.enum';
 import { RouterModule, Router } from '@angular/router';
+import { ExpenseService } from '../shared/expense.service';
 
 @Component({
   selector: 'app-day-selector',
@@ -12,19 +13,19 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class DaySelectorComponent {
   days = Object.values(Days);
+  currentDay: string = 'Monday';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public expenseService: ExpenseService) {
+    expenseService.currentDay$.subscribe({
+      next: (day) => {
+        this.currentDay = day;
+      },
+    });
+  }
 
   private navigableDays = Object.values(Days).filter(
     (day) => day !== Days.Total
   );
-
-  @Input() currentDay!: string;
-  @Output() daySelected = new EventEmitter<string>();
-
-  selectDay(day: string) {
-    this.daySelected.emit(day);
-  }
 
   goToPrevious() {
     const currentIndex = this.navigableDays.indexOf(
@@ -33,7 +34,6 @@ export class DaySelectorComponent {
     const newIndex =
       (currentIndex - 1 + this.navigableDays.length) %
       this.navigableDays.length;
-    this.selectDay(this.navigableDays[newIndex]);
 
     this.router.navigate([this.navigableDays[newIndex]]);
   }
@@ -43,10 +43,7 @@ export class DaySelectorComponent {
       this.currentDay as Exclude<Days, Days.Total>
     );
     const newIndex = (currentIndex + 1) % this.navigableDays.length;
-    this.selectDay(this.navigableDays[newIndex]);
 
     this.router.navigate([this.navigableDays[newIndex]]);
   }
-
-
 }
