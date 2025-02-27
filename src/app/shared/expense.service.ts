@@ -55,9 +55,7 @@ export class ExpenseService {
       if (storedExpenses) {
         const parsed = JSON.parse(storedExpenses);
         if (this.isValidExpensesStructure(parsed)) {
-          console.log('Loaded expenses from localStorage:', parsed);
           this.expensesSubject.next(parsed);
-          console.log('Current expenses:', this.expensesSubject.value);
         } else {
           console.error('Invalid expenses structure in localStorage. Resetting expenses.');
           localStorage.setItem(this.storageKey, "{}");

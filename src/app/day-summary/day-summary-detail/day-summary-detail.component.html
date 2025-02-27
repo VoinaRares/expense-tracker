@@ -1,0 +1,13 @@
+@if(dailyExpenses.length > 0){
+  <div class="border">
+    <p>Category: Amount</p>
+    <p>--------------------</p>
+    @for(dailyExpense of dailyExpenses; track dailyExpense.category +
+    dailyExpense.amount){
+    <p>{{ dailyExpense.category }}: {{ dailyExpense.amount | currency }}</p>
+    }
+  </div>
+}
+@else{
+  <p>No expenses for this day</p>
+}

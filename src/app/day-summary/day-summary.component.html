@@ -1,6 +1,4 @@
 <li (click)="clicked()">{{ day }}: {{ total | currency }}</li>
 @if(isClicked === true){
-<app-expense-list
-  (expenseDeleted)="expenseService.deleteExpense(day, $event)"
-></app-expense-list>
+  <app-day-summary-detail day="{{day}}"></app-day-summary-detail>
 }
