@@ -6,7 +6,18 @@
     <p>{{ dailyExpense.category }}: {{ dailyExpense.amount | currency }}</p>
     }
   </div>
+
+  <canvas baseChart
+  [type]="'pie'"
+  [datasets]="pieChartDatasets"
+  [labels]="pieChartLabels"
+  [options]="pieChartOptions"
+  [plugins]="pieChartPlugins"
+  [legend]="pieChartLegend">
+</canvas>
 }
 @else{
   <p>No expenses for this day</p>
 }
+
+
