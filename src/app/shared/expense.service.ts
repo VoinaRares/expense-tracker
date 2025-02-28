@@ -179,6 +179,7 @@ export class ExpenseService {
           currentExpenses[this.currentDaySubject.value][i] = edittedExpense;
         }
       }
+      this.saveExpensesToLocalStorage();
     } catch (error) {
       console.error('Error editing expense:', error);
       throw new Error('Failed to edit expense');

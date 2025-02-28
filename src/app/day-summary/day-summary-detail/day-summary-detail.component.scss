@@ -1,9 +1,6 @@
 .border {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   margin-top: 10px;
-  background-color: #f9f9f9;
 }
 
 .p {
@@ -14,4 +11,28 @@
 
 .p:last-child {
   margin-bottom: 0;
+}
+
+.day-summary-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.expense-breakdown {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.pie-chart-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  max-width: 100%;
+  max-height: 100%;
 }

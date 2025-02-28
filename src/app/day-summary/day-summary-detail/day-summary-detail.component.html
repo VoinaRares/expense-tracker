@@ -1,20 +1,23 @@
-@if(dailyExpenses.length > 0){
-  <div class="border">
+@if(dailyExpenses.length !== 0){
+<div class="day-summary-detail">
+  <div class="expense-breakdown border">
     <p>Category: Amount</p>
     <p>--------------------</p>
-    @for(dailyExpense of dailyExpenses; track dailyExpense.id){
-    <p>{{ dailyExpense.category }}: {{ dailyExpense.amount | currency }}</p>
-    }
+    <p *ngFor="let dailyExpense of dailyExpenses">
+      {{ dailyExpense.category }}: {{ dailyExpense.amount | currency }}
+    </p>
   </div>
-
-  <canvas baseChart
-  [type]="'pie'"
-  [datasets]="pieChartDatasets"
-  [labels]="pieChartLabels"
-  [options]="pieChartOptions"
-  [plugins]="pieChartPlugins"
-  [legend]="pieChartLegend">
-</canvas>
+  <div class="pie-chart-container">
+    <canvas baseChart
+      [type]="'pie'"
+      [datasets]="pieChartDatasets"
+      [labels]="pieChartLabels"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [legend]="pieChartLegend">
+    </canvas>
+  </div>
+</div>
 }
 @else{
   <p>No expenses for this day</p>
