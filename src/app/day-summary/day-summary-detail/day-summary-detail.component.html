@@ -2,8 +2,7 @@
   <div class="border">
     <p>Category: Amount</p>
     <p>--------------------</p>
-    @for(dailyExpense of dailyExpenses; track dailyExpense.category +
-    dailyExpense.amount){
+    @for(dailyExpense of dailyExpenses; track dailyExpense.id){
     <p>{{ dailyExpense.category }}: {{ dailyExpense.amount | currency }}</p>
     }
   </div>

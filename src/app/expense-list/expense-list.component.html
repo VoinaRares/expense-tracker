@@ -1,6 +1,23 @@
 <ul>
   <li *ngFor="let expense of expenses; let i = index">
     {{ expense.category }}: {{ expense.amount | currency }}
-    <button (click)="deleteExpense(i)">Delete</button>
+    <button class="edit-button" (click)="editExpense(i)">Edit</button>
+    <button class="delete-button" (click)="deleteExpense(i)">Delete</button>
   </li>
 </ul>
+
+<div *ngIf="editingExpense" class="edit-form">
+  <h3>Edit Expense</h3>
+  <form (ngSubmit)="saveExpense()">
+    <label>
+      Category:
+      <input [(ngModel)]="editingExpense.category" name="category" required />
+    </label>
+    <label>
+      Amount:
+      <input [(ngModel)]="editingExpense.amount" name="amount" type="number" required />
+    </label>
+    <button type="submit">Save</button>
+    <button type="button" (click)="cancelEdit()">Cancel</button>
+  </form>
+</div>

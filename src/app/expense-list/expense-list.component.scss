@@ -1,5 +1,7 @@
 $delete-button-color: #e74c3c;
 $delete-button-color-dark: #c0392b;
+$edit-button-color: #0a71f8;
+$edit-button-color-dark:  #4e9afe;;
 
 ul {
   list-style: none;
@@ -9,7 +11,6 @@ ul {
     margin: 5px 0;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
@@ -19,36 +20,54 @@ ul {
     &:hover {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
+
+    .buttons {
+      display: flex;
+      gap: 5px;
+    }
+
   }
 }
 
 button {
+  display: flex;
   padding: 8px 12px;
   font-size: 14px;
   font-weight: bold;
   color: white;
-  background: linear-gradient(
-    90deg,
-    $delete-button-color,
-    $delete-button-color
-  );
   border: none;
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  gap: 5px;
 
-  &:hover {
-    background: linear-gradient(
-      90deg,
-      $delete-button-color-dark,
-      $delete-button-color-dark
-    );
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transform: scale(1.01);
+  &.delete-button {
+    background: linear-gradient(90deg, $delete-button-color, $delete-button-color);
+
+    &:hover {
+      background: linear-gradient(90deg, $delete-button-color-dark, $delete-button-color-dark);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.01);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: none;
+    }
   }
 
-  &:active {
-    transform: scale(1);
-    box-shadow: none;
+  &.edit-button {
+    background: linear-gradient(90deg, $edit-button-color, $edit-button-color);
+
+    &:hover {
+      background: linear-gradient(90deg, $edit-button-color-dark, $edit-button-color-dark);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.01);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: none;
+    }
   }
 }

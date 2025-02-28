@@ -68,6 +68,18 @@ export class ExpenseService {
     }
   }
 
+  private findNextId(){
+    let maxId = 0;
+    for (const day in this.expensesSubject.value) {
+      this.expensesSubject.value[day].forEach((expense) => {
+        if (expense.id > maxId) {
+          maxId = expense.id;
+        }
+      });
+    }
+    return maxId + 1;
+  }
+
   private isValidExpensesStructure(data: Expense[]): boolean {
     return typeof data === 'object' && Object.keys(data).every((key) => {
       if (!this.days.includes(key)) {
@@ -103,6 +115,7 @@ export class ExpenseService {
       if (!currentExpenses[this.currentDaySubject.value]) {
         currentExpenses[this.currentDaySubject.value] = [];
       }
+      expense.id = this.findNextId();
       currentExpenses[this.currentDaySubject.value].push(expense);
       this.expensesSubject.next(currentExpenses);
       this.saveExpensesToLocalStorage();
@@ -112,18 +125,16 @@ export class ExpenseService {
     }
   }
 
-  deleteExpense(day: string, index: number) {
+  deleteExpense(day: string, id: number) {
     if (!this.days.includes(day)) {
       throw new Error(`Invalid day: ${day}`);
     }
 
     const currentExpenses = this.expensesSubject.value;
-    if (!currentExpenses[day] || index < 0 || index >= currentExpenses[day].length) {
-      throw new Error(`Invalid expense index: ${index} for day ${day}`);
-    }
-
     try {
-      currentExpenses[day].splice(index, 1);
+      currentExpenses[day] = currentExpenses[day].filter((expense) => {
+        return expense.id !== id;
+      });
       this.expensesSubject.next(currentExpenses);
       this.saveExpensesToLocalStorage();
     } catch (error) {
@@ -151,5 +162,26 @@ export class ExpenseService {
       summary[day] = this.getDailyTotal(day);
       return summary;
     }, {} as ExpensesByDay);
+  }
+
+  editExpense(edittedExpense: Expense) {
+    if (!this.days.includes(this.currentDaySubject.value)) {
+      throw new Error(`Cannot edit expense on invalid day: ${this.currentDaySubject.value}`);
+    }
+
+    try {
+      const currentExpenses = this.expensesSubject.value;
+      if (!currentExpenses[this.currentDaySubject.value]) {
+        currentExpenses[this.currentDaySubject.value] = [];
+      }
+      for (const i in currentExpenses[this.currentDaySubject.value]) {
+        if(currentExpenses[this.currentDaySubject.value][i].id === edittedExpense.id){
+          currentExpenses[this.currentDaySubject.value][i] = edittedExpense;
+        }
+      }
+    } catch (error) {
+      console.error('Error editing expense:', error);
+      throw new Error('Failed to edit expense');
+    }
   }
 }

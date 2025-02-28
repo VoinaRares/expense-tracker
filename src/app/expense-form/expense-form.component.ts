@@ -17,7 +17,7 @@ export class ExpenseFormComponent {
 
   addExpense() {
     if (this.category && this.amount > 0) {
-      this.expenseAdded.emit({ category: this.category, amount: this.amount });
+      this.expenseAdded.emit({id: 0, category: this.category, amount: this.amount });
       this.category = '';
       this.amount = 0;
     }
