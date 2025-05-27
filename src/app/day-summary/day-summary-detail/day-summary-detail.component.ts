@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core';
 import { ExpenseService } from '../../shared/expense.service';
 import { Expense } from '../../shared/expense.interface';
 import { CommonModule } from '@angular/common';
-import { BaseChartDirective } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { ChartOptions } from 'chart.js';
 
 
 @Component({
   selector: 'app-day-summary-detail',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective],
+  imports: [CommonModule, NgChartsModule],
   templateUrl: './day-summary-detail.component.html',
   styleUrl: './day-summary-detail.component.scss'
 })
