@@ -1,11 +1,18 @@
-<h1> Expense Tracker</h1>
-<app-day-selector
-></app-day-selector>
-<app-expense-form
-  (expenseAdded)="expenseService.addExpense($event)"
-></app-expense-form>
-<app-expense-list
-  (expenseDeleted)="
-    expenseService.deleteExpense(currentDay, $event)
-  "
-></app-expense-list>
+<ng-container *ngIf="!(expenseService.loading$ | async); else loadingBlock">
+  <h1> Expense Tracker</h1>
+  <app-day-selector></app-day-selector>
+  <app-expense-form (expenseAdded)="expenseService.addExpense($event)"></app-expense-form>
+  <app-expense-list (expenseDeleted)="expenseService.deleteExpense(currentDay, $event)"></app-expense-list>
+  <button (click)="rightMenuVisible = true" class="menu-icon-btn">
+    <i class="pi pi-bars"></i>
+  </button>
+  <p-sidebar [(visible)]="rightMenuVisible" position="left">
+    <h2>Menu</h2>
+    <button (click)="logout()" class="logout-btn">Logout</button>
+  </p-sidebar>
+</ng-container>
+<ng-template #loadingBlock>
+  <div class="loading-block">
+    Loading expenses...
+  </div>
+</ng-template>

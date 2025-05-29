@@ -4,12 +4,13 @@ import { Expense } from '../../shared/expense.interface';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartOptions } from 'chart.js';
+import { TableModule } from 'primeng/table';
 
 
 @Component({
   selector: 'app-day-summary-detail',
   standalone: true,
-  imports: [CommonModule, NgChartsModule],
+  imports: [CommonModule, NgChartsModule, TableModule],
   templateUrl: './day-summary-detail.component.html',
   styleUrl: './day-summary-detail.component.scss'
 })
@@ -35,7 +36,14 @@ export class DaySummaryDetailComponent {
   }
 
   ngOnInit() {
-    this.dailyExpenses = this.expenseService.getExpensesForDay(this.day);
+    if (this.day === 'Total') {
+      const allDays = this.expenseService.days.filter(d => d !== 'Total');
+      this.dailyExpenses = allDays.flatMap(day =>
+        this.expenseService.getExpensesForDay(day).map(exp => ({ ...exp, day }))
+      );
+    } else {
+      this.dailyExpenses = this.expenseService.getExpensesForDay(this.day);
+    }
     this.updateChart();
   }
 

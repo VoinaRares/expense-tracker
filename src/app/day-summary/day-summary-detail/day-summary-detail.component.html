@@ -1,11 +1,22 @@
 @if(dailyExpenses.length !== 0){
 <div class="day-summary-detail">
   <div class="expense-breakdown border">
-    <p>Category: Amount</p>
-    <p>--------------------</p>
-    <p *ngFor="let dailyExpense of dailyExpenses">
-      {{ dailyExpense.category }}: {{ dailyExpense.amount | currency }}
-    </p>
+    <p-table [value]="dailyExpenses" [responsiveLayout]="'scroll'">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+          <th *ngIf="day === 'Total'">Day</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-expense>
+        <tr>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.amount | currency }}</td>
+          <td *ngIf="day === 'Total'">{{ expense.day }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
   <div class="pie-chart-container">
     <canvas baseChart

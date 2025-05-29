@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Expense } from '../shared/expense.interface';
 import { ExpenseService } from '../shared/expense.service';
 import { FormsModule } from '@angular/forms';
+import { ListboxModule } from 'primeng/listbox';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-expense-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ListboxModule, ButtonModule, DialogModule, InputTextModule, CardModule],
   templateUrl: './expense-list.component.html',
   styleUrls: ['./expense-list.component.scss'],
 })
@@ -51,6 +56,10 @@ export class ExpenseListComponent {
 
   cancelEdit() {
     this.editingExpense = null;
+  }
+
+  showEditDialog(): boolean {
+    return this.editingExpense !== null;
   }
 
 }

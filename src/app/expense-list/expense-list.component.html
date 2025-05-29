@@ -1,23 +1,26 @@
-<ul>
-  <li *ngFor="let expense of expenses; let i = index">
-    {{ expense.category }}: {{ expense.amount | currency }}
-    <button class="edit-button" (click)="editExpense(i)">Edit</button>
-    <button class="delete-button" (click)="deleteExpense(i)">Delete</button>
+<ul class="expense-list p-0">
+  <li *ngFor="let expense of expenses; let i = index" class="expense-row p-d-flex p-ai-center p-jc-between p-mb-2">
+    <span class="expense-category">{{ expense.category }}: {{ expense.amount | currency }}</span>
+    <span class="expense-buttons buttons">
+      <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info p-mx-1" (click)="editExpense(i)" label="Edit"></button>
+      <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-mx-1" (click)="deleteExpense(i)" label="Delete"></button>
+    </span>
   </li>
 </ul>
 
-<div *ngIf="editingExpense" class="edit-form">
-  <h3>Edit Expense</h3>
-  <form (ngSubmit)="saveExpense()">
-    <label>
-      Category:
-      <input [(ngModel)]="editingExpense.category" name="category" required />
-    </label>
-    <label>
-      Amount:
-      <input [(ngModel)]="editingExpense.amount" name="amount" type="number" required />
-    </label>
-    <button type="submit">Save</button>
-    <button type="button" (click)="cancelEdit()">Cancel</button>
+<p-dialog header="Edit Expense" [visible]="showEditDialog()" [modal]="true" [closable]="false">
+  <form *ngIf="editingExpense" (ngSubmit)="saveExpense()" class="p-fluid">
+    <div class="p-field">
+      <label for="category">Category: </label>
+      <input pInputText id="category" [(ngModel)]="editingExpense.category" name="category" required />
+    </div>
+    <div class="p-field">
+      <label for="amount">Amount: </label>
+      <input pInputText id="amount" [(ngModel)]="editingExpense.amount" name="amount" type="number" required />
+    </div>
+    <div class="p-d-flex p-jc-end p-mt-3">
+      <button pButton type="submit" label="Save" class="p-button-success p-mr-2"></button>
+      <button pButton type="button" (click)="cancelEdit()" label="Cancel" class="p-button-secondary"></button>
+    </div>
   </form>
-</div>
+</p-dialog>

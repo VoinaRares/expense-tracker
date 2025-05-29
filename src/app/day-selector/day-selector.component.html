@@ -1,14 +1,14 @@
 <div class="day-selector">
-  <button (click)="goToPrevious()">Previous</button>
+  <button pButton icon="pi pi-angle-left" (click)="goToPrevious()" class="p-button-rounded p-button-text p-mx-1"> < </button>
 
-  <button [class.active]=" 'Monday' === currentDay" routerLink="/Monday"> Monday</button>
-  <button [class.active]=" 'Tuesday' === currentDay" routerLink="/Tuesday"> Tuesday</button>
-  <button [class.active]=" 'Wednesday' === currentDay" routerLink="/Wednesday"> Wednesday</button>
-  <button [class.active]=" 'Thursday' === currentDay" routerLink="/Thursday"> Thursday</button>
-  <button [class.active]=" 'Friday' === currentDay" routerLink="/Friday"> Friday</button>
-  <button [class.active]=" 'Saturday' === currentDay" routerLink="/Saturday"> Saturday</button>
-  <button [class.active]=" 'Sunday' === currentDay" routerLink="/Sunday"> Sunday</button>
-  <button [class.active]=" 'Total' === currentDay" routerLink="/Total"> Total </button>
+  <button
+    *ngFor="let day of days"
+    pButton
+    [class.p-button-outlined]="day !== currentDay"
+    [class.p-button-secondary]="day === currentDay"
+    [routerLink]="'/' + day"
+    class="p-mx-1"
+  >{{ day }}</button>
 
-  <button (click)="goToNext()">Next</button>
+  <button pButton icon="pi pi-angle-right" (click)="goToNext()" class="p-button-rounded p-button-text p-mx-1"> > </button>
 </div>

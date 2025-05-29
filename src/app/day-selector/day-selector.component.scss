@@ -8,22 +8,44 @@ $background-color: #007bff;
   gap: 10px;
 }
 
-button {
-  margin: 5px;
-  padding: 8px 12px;
+.day-selector button, .day-selector .p-button {
+  border: 2px solid #000000 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transition: color 0.3s, background 0.3s, transform 0.2s, box-shadow 0.3s !important;
   font-size: 14px;
-  background-color: $background-color;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  color: black;
+  background: #f8f9fa !important;
+  padding: 8px 12px;
+  margin: 0 4px;
+}
 
-  &:hover {
-    background-color: darken($background-color, 10%);
-    transform: scale(1.05);
-  }
-  &.active {
-    background-color: #010736;
-  }
+.day-selector button:hover, .day-selector .p-button:hover {
+  color: #0a71f8 !important;
+  transform: scale(1.07);
+  box-shadow: 0 4px 16px rgba(10, 113, 248, 0.15);
+}
+
+.day-selector .p-button-secondary {
+  background: linear-gradient(90deg, #0a71f8, #4e9afe) !important;
+  color: #fff !important;
+  border-color: #0a71f8 !important;
+}
+
+.day-selector .p-button-secondary:hover {
+  color: #fff !important;
+  background: linear-gradient(90deg, #4e9afe, #0a71f8) !important;
+  box-shadow: 0 4px 16px rgba(10, 113, 248, 0.15);
+}
+
+.day-selector .p-button-outlined {
+  background: #f8f9fa !important;
+  color: #0a71f8 !important;
+  border-color: #0a71f8 !important;
+}
+
+.day-selector .p-button-outlined:hover {
+  background: #e0e7ff !important;
+  color: #0a71f8 !important;
 }

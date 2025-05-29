@@ -1,4 +1,4 @@
-<form (submit)="addExpense(); $event.preventDefault()">
+<form (submit)="addExpense(); $event.preventDefault()" class="p-d-flex p-flex-column">
   <input
     type="text"
     [(ngModel)]="category"
@@ -13,5 +13,12 @@
     placeholder="Amount"
     required
   />
-  <button type="submit">Add Expense</button>
+  <div class="p-d-flex p-jc-center p-mt-2">
+    <button
+      pButton
+      type="submit"
+      label="Add Expense"
+      class="p-button-sm"
+    > Add Expense</button>
+  </div>
 </form>

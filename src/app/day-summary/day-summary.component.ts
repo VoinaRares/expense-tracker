@@ -19,7 +19,12 @@ export class DaySummaryComponent{
   constructor(public expenseService: ExpenseService) {}
 
   ngOnInit(){
-    this.total = this.expenseService.getDailyTotal(this.day);
+    if (this.day === 'Total') {
+      const allDays = this.expenseService.days.filter(d => d !== 'Total');
+      this.total = allDays.reduce((sum, day) => sum + this.expenseService.getDailyTotal(day), 0);
+    } else {
+      this.total = this.expenseService.getDailyTotal(this.day);
+    }
   }
 
   clicked() {
