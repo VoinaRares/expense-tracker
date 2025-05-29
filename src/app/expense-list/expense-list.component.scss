@@ -1,7 +1,7 @@
 $delete-button-color: #e74c3c;
 $delete-button-color-dark: #c0392b;
 $edit-button-color: #0a71f8;
-$edit-button-color-dark:  #4e9afe;;
+$edit-button-color-dark: #4e9afe;
 
 ul {
   list-style: none;
@@ -18,7 +18,7 @@ ul {
     border: 1px solid #ddd;
     border-radius: 5px;
     transition: box-shadow 0.3s ease;
-    color: #000000;
+    color: #000;
 
     &:hover {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);

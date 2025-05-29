@@ -1,26 +1,78 @@
 <ul class="expense-list p-0">
   <li *ngFor="let expense of expenses; let i = index" class="expense-row p-d-flex p-ai-center p-jc-between p-mb-2">
-    <span class="expense-category">{{ expense.category }}: {{ expense.amount | currency }}</span>
+    <span class="expense-category">
+      {{ expense.category }}: {{ expense.amount | currency }}
+    </span>
     <span class="expense-buttons buttons">
-      <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info p-mx-1" (click)="editExpense(i)" label="Edit"></button>
-      <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-mx-1" (click)="deleteExpense(i)" label="Delete"></button>
+      <button
+        pButton
+        type="button"
+        icon="pi pi-pencil"
+        class="p-button-rounded p-button-info p-mx-1"
+        (click)="editExpense(i)"
+        label="Edit"
+        aria-label="Edit expense"
+      ></button>
+      <button
+        pButton
+        type="button"
+        icon="pi pi-trash"
+        class="p-button-rounded p-button-danger p-mx-1"
+        (click)="deleteExpense(i)"
+        label="Delete"
+        aria-label="Delete expense"
+      ></button>
     </span>
   </li>
 </ul>
 
-<p-dialog header="Edit Expense" [visible]="showEditDialog()" [modal]="true" [closable]="false">
+<p-dialog
+  header="Edit Expense"
+  [visible]="showEditDialog()"
+  [modal]="true"
+  [closable]="false"
+>
   <form *ngIf="editingExpense" (ngSubmit)="saveExpense()" class="p-fluid">
     <div class="p-field">
-      <label for="category">Category: </label>
-      <input pInputText id="category" [(ngModel)]="editingExpense.category" name="category" required />
+      <label for="category">Category:</label>
+      <input
+        pInputText
+        id="category"
+        [(ngModel)]="editingExpense.category"
+        name="category"
+        required
+        autocomplete="off"
+      />
     </div>
     <div class="p-field">
-      <label for="amount">Amount: </label>
-      <input pInputText id="amount" [(ngModel)]="editingExpense.amount" name="amount" type="number" required />
+      <label for="amount">Amount:</label>
+      <input
+        pInputText
+        id="amount"
+        [(ngModel)]="editingExpense.amount"
+        name="amount"
+        type="number"
+        required
+        min="0.01"
+        step="0.01"
+      />
     </div>
     <div class="p-d-flex p-jc-end p-mt-3">
-      <button pButton type="submit" label="Save" class="p-button-success p-mr-2"></button>
-      <button pButton type="button" (click)="cancelEdit()" label="Cancel" class="p-button-secondary"></button>
+      <button
+        pButton
+        type="submit"
+        label="Save"
+        class="p-button-success p-mr-2"
+        aria-label="Save changes"
+      ></button>
+      <button
+        pButton
+        type="button"
+        (click)="cancelEdit()"
+        label="Cancel"
+        class="p-button-secondary"
+        aria-label="Cancel editing"
+      ></button>
     </div>
   </form>
 </p-dialog>

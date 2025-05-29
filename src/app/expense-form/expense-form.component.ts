@@ -11,13 +11,16 @@ import { Expense } from '../shared/expense.interface';
 })
 export class ExpenseFormComponent {
   @Output() expenseAdded = new EventEmitter<Expense>();
+  category = '';
+  amount = 0;
 
-  category: string = '';
-  amount: number = 0;
-
-  addExpense() {
+  addExpense(): void {
     if (this.category && this.amount > 0) {
-      this.expenseAdded.emit({id: 0, category: this.category, amount: this.amount });
+      this.expenseAdded.emit({
+        id: 0,
+        category: this.category,
+        amount: this.amount,
+      });
       this.category = '';
       this.amount = 0;
     }

@@ -1,6 +1,13 @@
 <div class="day-selector">
-  <button pButton icon="pi pi-angle-left" (click)="goToPrevious()" class="p-button-rounded p-button-text p-mx-1"> < </button>
-
+  <button
+    pButton
+    icon="pi pi-angle-left"
+    (click)="goToPrevious()"
+    class="p-button-rounded p-button-text p-mx-1"
+    aria-label="Previous day"
+  >
+    &lt;
+  </button>
   <button
     *ngFor="let day of days"
     pButton
@@ -8,7 +15,16 @@
     [class.p-button-secondary]="day === currentDay"
     [routerLink]="'/' + day"
     class="p-mx-1"
-  >{{ day }}</button>
-
-  <button pButton icon="pi pi-angle-right" (click)="goToNext()" class="p-button-rounded p-button-text p-mx-1"> > </button>
+  >
+    {{ day }}
+  </button>
+  <button
+    pButton
+    icon="pi pi-angle-right"
+    (click)="goToNext()"
+    class="p-button-rounded p-button-text p-mx-1"
+    aria-label="Next day"
+  >
+    &gt;
+  </button>
 </div>

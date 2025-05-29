@@ -9,43 +9,47 @@ import { CommonModule } from '@angular/common';
 import { Expense } from '../shared/expense.interface';
 import { SidebarModule } from 'primeng/sidebar';
 
-
 @Component({
   selector: 'app-day-expense',
   standalone: true,
-  imports: [CommonModule, DaySelectorComponent, ExpenseFormComponent, ExpenseListComponent, SidebarModule],
+  imports: [
+    CommonModule,
+    DaySelectorComponent,
+    ExpenseFormComponent,
+    ExpenseListComponent,
+    SidebarModule,
+  ],
   templateUrl: './day-expense.component.html',
   styleUrls: ['./day-expense.component.scss'],
 })
 export class DayExpenseComponent {
-  currentDay: string = '';
+  currentDay = '';
   expenses: Expense[] = [];
-  rightMenuVisible: boolean = false;
+  rightMenuVisible = false;
 
   constructor(
     public expenseService: ExpenseService,
     private authService: AuthService,
     private router: Router
   ) {
-    expenseService.currentDay$.subscribe({
+    this.expenseService.currentDay$.subscribe({
       next: (day) => {
         this.currentDay = day;
         this.updateExpenses();
-      }
+      },
     });
-
-    expenseService.expenses$.subscribe({
+    this.expenseService.expenses$.subscribe({
       next: () => {
         this.updateExpenses();
-      }
+      },
     });
   }
 
-  private updateExpenses() {
+  private updateExpenses(): void {
     this.expenses = this.expenseService.getExpensesForDay(this.currentDay);
   }
 
-  logout() {
+  logout(): void {
     this.authService.signOut().subscribe(() => {
       this.router.navigate(['/']);
     });

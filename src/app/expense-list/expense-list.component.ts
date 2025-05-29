@@ -19,11 +19,11 @@ import { CardModule } from 'primeng/card';
 export class ExpenseListComponent {
   @Output() expenseDeleted = new EventEmitter<number>();
   expenses: Expense[] = [];
-  currentDay: string = '';
+  currentDay = '';
   editingExpense: Expense | null = null;
 
   constructor(private expenseService: ExpenseService) {
-    expenseService.currentDay$.subscribe({
+    this.expenseService.currentDay$.subscribe({
       next: (day) => {
         this.currentDay = day;
         this.expenses = this.expenseService.getExpensesForDay(this.currentDay);
@@ -36,15 +36,16 @@ export class ExpenseListComponent {
     });
   }
 
-  deleteExpense(index: number) {
-    let savedIndex = this.expenses[index].id;
-    this.expenseService.deleteExpense(this.expenseService.getCurrentDaySubject(), savedIndex);
-  }
-  editExpense(index: number) {
-    this.editingExpense = {...this.expenses[index]};
+  deleteExpense(index: number): void {
+    const expenseId = this.expenses[index].id;
+    this.expenseService.deleteExpense(this.expenseService.getCurrentDaySubject(), expenseId);
   }
 
-  saveExpense(){
+  editExpense(index: number): void {
+    this.editingExpense = { ...this.expenses[index] };
+  }
+
+  saveExpense(): void {
     if (this.editingExpense) {
       const index = this.expenses.findIndex(exp => exp.id === this.editingExpense!.id);
       if (index !== -1) {
@@ -54,7 +55,7 @@ export class ExpenseListComponent {
     }
   }
 
-  cancelEdit() {
+  cancelEdit(): void {
     this.editingExpense = null;
   }
 

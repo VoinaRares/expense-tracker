@@ -14,14 +14,14 @@ form {
 }
 
 input {
-  background-color: white;
+  background-color: #fff;
   margin: 5px 0;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 70%;
-  color: black;
+  color: #000;
 }
 
 button {
@@ -29,7 +29,7 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  color: #fff;
   background: linear-gradient(90deg, $primary-color, $primary-color);
   border: none;
   border-radius: 25px;
@@ -37,17 +37,13 @@ button {
   transition: 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 
   &:hover {
-    background: linear-gradient(
-      90deg,
-      $primary-color-dark,
-      $primary-color-dark
-    );
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transform: scale(1.01);
+    background: linear-gradient(90deg, $primary-color-dark, $primary-color-dark);
+    box-shadow: 0 4px 16px rgba(0, 123, 255, 0.12);
+    transform: scale(1.07);
   }
 
   &:active {
-    transform: scale(1);
+    transform: scale(0.98);
     box-shadow: none;
   }
 }

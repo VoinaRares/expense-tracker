@@ -1,14 +1,14 @@
 <ng-container *ngIf="!(expenseService.loading$ | async); else loadingBlock">
-  <h1> Expense Tracker</h1>
+  <h1>Expense Tracker</h1>
   <app-day-selector></app-day-selector>
   <app-expense-form (expenseAdded)="expenseService.addExpense($event)"></app-expense-form>
   <app-expense-list (expenseDeleted)="expenseService.deleteExpense(currentDay, $event)"></app-expense-list>
-  <button (click)="rightMenuVisible = true" class="menu-icon-btn">
+  <button (click)="rightMenuVisible = true" class="menu-icon-btn" aria-label="Open menu">
     <i class="pi pi-bars"></i>
   </button>
   <p-sidebar [(visible)]="rightMenuVisible" position="left">
     <h2>Menu</h2>
-    <button (click)="logout()" class="logout-btn">Logout</button>
+    <button (click)="logout()" class="logout-btn" aria-label="Logout">Logout</button>
   </p-sidebar>
 </ng-container>
 <ng-template #loadingBlock>
